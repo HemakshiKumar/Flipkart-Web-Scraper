@@ -34,7 +34,8 @@ Requirements:
 
 Install the required Python libraries:
 
-- pip install requests beautifulsoup4 pandas
+- pip install requests beautifulsoup4
+- pandas
 
 How to Use
 
