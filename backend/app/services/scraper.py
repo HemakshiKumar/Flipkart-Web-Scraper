@@ -9,6 +9,9 @@ map one-to-one onto the ``_field`` helpers below.
 Differences from the notebook, all additive:
 
 * the search URL is built from a user query instead of being pasted in;
+* when a configured selector matches nothing, a structural fallback fills the
+  gap (see :mod:`app.services.extractors`); the configured selectors always
+  win when they match;
 * the product URL is kept alongside the scraped fields (the website needs to
   link back to Flipkart);
 * detail pages are fetched through a thread pool and a shared session;
@@ -18,6 +21,7 @@ Differences from the notebook, all additive:
 from __future__ import annotations
 
 import logging
+import time
 from concurrent.futures import ThreadPoolExecutor
 from dataclasses import asdict, dataclass, field
 from urllib.parse import quote_plus, urljoin
@@ -28,6 +32,7 @@ from bs4 import BeautifulSoup as bs
 from bs4 import Tag
 
 from app.config import Settings, get_settings
+from app.services import extractors
 
 logger = logging.getLogger(__name__)
 
@@ -121,12 +126,19 @@ class FlipkartScraper:
             if absolute not in seen:
                 seen.add(absolute)
                 links.append(absolute)
-        return links
+
+        if links or not self.settings.structural_fallback:
+            return links
+
+        # The configured anchor class matched nothing: fall back to the
+        # schema.org ItemList / product-URL shape (see services/extractors.py).
+        logger.info("scrape.links_fallback selector=%s", self.selectors["product_link"])
+        return extractors.extract_product_links(html, self.settings.flipkart_base_url)
 
     # -- product page -----------------------------------------------------
     def parse_product(self, html: bytes | str, url: str = "") -> ScrapedProduct:
         content = bs(html, "html.parser")
-        return ScrapedProduct(
+        product = ScrapedProduct(
             TITLE=_text(content, self.selectors["title"]),
             PRICE=_text(content, self.selectors["price"]),
             AVG_RATING=_text(content, self.selectors["rating"]),
@@ -135,6 +147,23 @@ class FlipkartScraper:
             REVIEW_COUNT=_text(content, self.selectors["review_count"]),
             URL=url,
         )
+        if self.settings.structural_fallback:
+            self._fill_gaps(product, content, html)
+        return product
+
+    def _fill_gaps(self, product: ScrapedProduct, content: Tag, html: bytes | str) -> None:
+        """Fill only the fields the configured selectors could not produce."""
+        text = html.decode("utf-8", "ignore") if isinstance(html, bytes) else html
+        if not product.TITLE:
+            product.TITLE = extractors.extract_title(content)
+        if not product.PRICE:
+            product.PRICE = extractors.extract_price(content)
+        if not product.DETAILS:
+            product.DETAILS = extractors.extract_details(content)
+        if not product.AVG_RATING:
+            product.AVG_RATING = extractors.extract_rating(text)
+        if not product.REVIEW_COUNT:
+            product.REVIEW_COUNT = extractors.extract_review_count(text)
 
     # -- orchestration ----------------------------------------------------
     def scrape(self, query: str, limit: int | None = None) -> pd.DataFrame:
@@ -183,10 +212,21 @@ class FlipkartScraper:
         return pd.DataFrame(rows, columns=CSV_COLUMNS)
 
     def _scrape_one(self, session: requests.Session, link: str) -> ScrapedProduct | None:
-        try:
-            page = session.get(link, timeout=self.settings.request_timeout)
-            page.raise_for_status()
-        except requests.RequestException as exc:
-            logger.debug("scrape.product_failed url=%s error=%s", link, exc)
-            return None
-        return self.parse_product(page.content, url=link)
+        """Fetch one product page, retrying once when Flipkart throttles us."""
+        for attempt in range(self.settings.scrape_retries + 1):
+            try:
+                page = session.get(link, timeout=self.settings.request_timeout)
+                page.raise_for_status()
+            except requests.HTTPError as exc:
+                status = exc.response.status_code if exc.response is not None else 0
+                throttled = status in (403, 429, 503)
+                if throttled and attempt < self.settings.scrape_retries:
+                    time.sleep(self.settings.scrape_retry_delay * (attempt + 1))
+                    continue
+                logger.debug("scrape.product_failed url=%s status=%s", link, status)
+                return None
+            except requests.RequestException as exc:
+                logger.debug("scrape.product_failed url=%s error=%s", link, exc)
+                return None
+            return self.parse_product(page.content, url=link)
+        return None
