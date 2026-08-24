@@ -76,9 +76,16 @@ class Settings(BaseSettings):
     request_timeout: float = 15.0
     #: How many product detail pages to fetch per search (scraping is the
     #: slow part of the pipeline, so this bounds the worst case).
-    max_products_per_search: int = 24
-    scrape_concurrency: int = 8
+    max_products_per_search: int = 20
+    #: Flipkart throttles aggressive clients with 403s, so this stays low.
+    scrape_concurrency: int = 4
+    scrape_retries: int = 1
+    scrape_retry_delay: float = 1.5
     scraping_enabled: bool = True
+    #: When a configured selector matches nothing, fall back to structural
+    #: extraction (schema.org JSON-LD + embedded rating state). Set to false to
+    #: run strictly on the selectors above.
+    structural_fallback: bool = True
     selectors_json: str | None = Field(default=None, alias="FLIPKART_SELECTORS")
 
     # --- dataset / cache --------------------------------------------------
