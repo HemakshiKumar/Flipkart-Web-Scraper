@@ -1,9 +1,9 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": "nextjs",
-  "buildCommand": "npm --prefix frontend run build",
-  "outputDirectory": "frontend/.next",
-  "installCommand": "npm --prefix frontend install",
+  "buildCommand": "npm run build",
+  "outputDirectory": ".next",
+  "installCommand": "npm install",
   "env": {
     "RECOMMENDER_API_URL": "https://flipkart-web-scraper.onrender.com",
     "NEXT_PUBLIC_ML_WORKSPACE_URL": "https://web-scraper-ml.onrender.com/lab/workspaces/auto-6?reset=1"
