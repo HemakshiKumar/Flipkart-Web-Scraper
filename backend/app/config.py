@@ -24,7 +24,7 @@ REPO_ROOT = BACKEND_ROOT.parent
 # Flipkart selectors.
 #
 # These are the EXACT anchor tags / CSS classes used by the original notebook
-# (`Web Scraping Project/code file.ipynb`). They are the source of truth for
+# (`web-scraping-project/code file.ipynb`). They are the source of truth for
 # scraping and must not be replaced with guesses. When Flipkart changes its
 # markup, override them through the FLIPKART_SELECTORS environment variable
 # (JSON object) instead of editing the scraper.
@@ -95,7 +95,7 @@ class Settings(BaseSettings):
     #: The dataset shipped with the repository. Used as the corpus when live
     #: scraping is unavailable (Flipkart blocks the request or has changed its
     #: markup) so the pipeline still returns real, previously scraped rows.
-    seed_dataset: Path = REPO_ROOT / "Web Scraping Project" / "flipkart_data.csv"
+    seed_dataset: Path = REPO_ROOT / "web-scraping-project" / "flipkart_data.csv"
     seed_dataset_fallback: bool = True
 
     # --- ranking weights (see services/recommender.py) --------------------

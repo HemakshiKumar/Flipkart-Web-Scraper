@@ -1,7 +1,7 @@
 # Flipkart Product Recommendation Engine
 
 A full-stack product discovery app built around the scraping + TF-IDF recommendation
-engine originally written in `Web Scraping Project/code file.ipynb`.
+engine originally written in `web-scraping-project/code file.ipynb`.
 
 Describe a product in plain English, describe what matters to you, and get a ranked
 list of real Flipkart products with links back to the store.
@@ -21,7 +21,7 @@ Next.js frontend  ──POST /api/recommend──▶  Next route handler
 
 | Path | What it is |
 | --- | --- |
-| `Web Scraping Project/` | The original notebook and dataset. Untouched — it remains the source of truth for selectors, cleaning rules and the ranking model. |
+| `web-scraping-project/` | The original notebook and dataset. Untouched — it remains the source of truth for selectors, cleaning rules and the ranking model. |
 | `backend/` | The engine, refactored into a FastAPI service. No logic was reinvented; the notebook's cells map onto modules. |
 | `frontend/` | Next.js 16 + TypeScript + Tailwind + shadcn/ui + Framer Motion. |
 

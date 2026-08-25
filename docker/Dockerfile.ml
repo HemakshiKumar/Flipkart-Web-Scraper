@@ -17,11 +17,11 @@ COPY docker/requirements-ml.txt /workspace/requirements-ml.txt
 RUN pip install -r /workspace/requirements-ml.txt
 
 # Copy dataset, notebook, and ML pipeline runner
-COPY "Web Scraping Project/" "/workspace/Web Scraping Project/"
+COPY web-scraping-project/ /workspace/web-scraping-project/
 COPY docker/ml_pipeline.py /workspace/ml_pipeline.py
 
 # Create a symlink/copy of dataset in working directory for convenience
-RUN cp "/workspace/Web Scraping Project/flipkart_data.csv" /workspace/flipkart_data.csv 2>/dev/null || true
+RUN cp "/workspace/web-scraping-project/flipkart_data.csv" /workspace/flipkart_data.csv 2>/dev/null || true
 
 # Expose JupyterLab port
 EXPOSE 8888

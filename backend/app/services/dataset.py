@@ -10,7 +10,7 @@ which means a cached search can be inspected, edited or replaced by hand, and
 the recommendation engine can be run against it without any network access.
 
 If a live scrape fails and ``SEED_DATASET_FALLBACK`` is enabled, the dataset
-shipped with the repository (``Web Scraping Project/flipkart_data.csv``) is
+shipped with the repository (``web-scraping-project/flipkart_data.csv``) is
 used instead. That file is real scraped data, not fixtures - the API reports
 which source was used so the UI can be honest about it.
 """

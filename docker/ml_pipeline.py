@@ -1,7 +1,7 @@
 """Standalone Machine Learning Model Pipeline.
 
 Reproduces the TF-IDF vectorization, cleaning, and cosine similarity ranking
-pipeline from `Web Scraping Project/code file.ipynb`.
+pipeline from `web-scraping-project/code file.ipynb`.
 
 Usage:
     python ml_pipeline.py "Bluetooth neckband with mic and 50-hour playback under 1000" --top-n 5
@@ -102,9 +102,9 @@ def main() -> None:
     dataset_path = Path(args.dataset)
     if not dataset_path.exists():
         fallback_candidates = [
-            Path("/workspace/Web Scraping Project/flipkart_data.csv"),
-            Path("Web Scraping Project/flipkart_data.csv"),
-            Path("../Web Scraping Project/flipkart_data.csv"),
+            Path("/workspace/web-scraping-project/flipkart_data.csv"),
+            Path("web-scraping-project/flipkart_data.csv"),
+            Path("../web-scraping-project/flipkart_data.csv"),
             Path("flipkart_data.csv"),
         ]
         for candidate in fallback_candidates:

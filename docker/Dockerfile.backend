@@ -24,7 +24,7 @@ RUN pip install -r /workspace/backend/requirements.txt
 
 # Copy backend application source code and seed dataset
 COPY backend/ /workspace/backend/
-COPY "Web Scraping Project/" "/workspace/Web Scraping Project/"
+COPY web-scraping-project/ /workspace/web-scraping-project/
 
 # Create cache directory with proper permissions
 RUN mkdir -p /workspace/backend/data/cache

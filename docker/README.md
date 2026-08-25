@@ -55,7 +55,7 @@ docker build -f docker/Dockerfile.ml -t flipkart-scraper-ml .
 ```bash
 docker run -d -p 8888:8888 --name flipkart-ml flipkart-scraper-ml
 ```
-Open **`http://localhost:8888`** in your browser to inspect or run `Web Scraping Project/code file.ipynb`.
+Open **`http://localhost:8888`** in your browser to inspect or run `web-scraping-project/code file.ipynb`.
 
 ### Run Standalone ML Model Inference (CLI)
 You can directly run TF-IDF queries against the model without starting a web server:

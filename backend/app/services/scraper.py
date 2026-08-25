@@ -1,7 +1,7 @@
 """Flipkart scraper.
 
 This module is a faithful refactor of the scraping cells in
-`Web Scraping Project/code file.ipynb`. The CSS classes it looks for are the
+`web-scraping-project/code file.ipynb`. The CSS classes it looks for are the
 ones that were already in the notebook (see `config.DEFAULT_SELECTORS`) - they
 are NOT re-invented here. The notebook's per-field ``get_product_*`` helpers
 map one-to-one onto the ``_field`` helpers below.

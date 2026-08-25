@@ -25,5 +25,5 @@ services:
     ports:
       - "8888:8888"
     volumes:
-      - ./Web Scraping Project:/workspace/Web Scraping Project
+      - ./web-scraping-project:/workspace/web-scraping-project
     restart: unless-stopped
