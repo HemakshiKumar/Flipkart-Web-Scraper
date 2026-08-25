@@ -39,17 +39,10 @@ export function Hero({ children }: { children: ReactNode }) {
 
         <motion.h1
           variants={item}
-          className="text-balance text-4xl font-semibold tracking-tight sm:text-5xl"
+          className="mx-auto max-w-2xl text-balance text-3xl font-semibold tracking-tight sm:text-4xl lg:text-5xl"
         >
-          Intelligent product discovery
+          Find the best products based on what you actually want!
         </motion.h1>
-
-        <motion.p
-          variants={item}
-          className="mx-auto max-w-md text-balance text-base leading-relaxed text-muted-foreground sm:text-lg"
-        >
-          Find the best products based on what you actually want — described in plain English.
-        </motion.p>
       </div>
 
       <motion.div variants={item}>{children}</motion.div>
