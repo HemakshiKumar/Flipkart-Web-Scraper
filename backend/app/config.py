@@ -55,7 +55,7 @@ class Settings(BaseSettings):
     host: str = "127.0.0.1"
     port: int = 8000
     log_level: str = "INFO"
-    cors_origins: str = "http://localhost:3000"
+    cors_origins: str = "http://localhost:3000,https://*.vercel.app,*"
 
     # --- request limits (also enforced by the API schema) ----------------
     max_recommendations: int = 50

@@ -6,15 +6,21 @@ engine originally written in `web-scraping-project/code file.ipynb`.
 Describe a product in plain English, describe what matters to you, and get a ranked
 list of real Flipkart products with links back to the store.
 
+## Live Deployments
+
+- **Frontend (Vercel)**: Deployed via Next.js
+- **Backend API (Render)**: [https://flipkart-web-scraper.onrender.com](https://flipkart-web-scraper.onrender.com) ([API Docs / Swagger](https://flipkart-web-scraper.onrender.com/docs))
+- **Machine Learning & JupyterLab (Render)**: [https://web-scraper-ml.onrender.com/lab/workspaces/auto-6?reset=1](https://web-scraper-ml.onrender.com/lab/workspaces/auto-6?reset=1)
+
 ```
-Next.js frontend  ──POST /api/recommend──▶  Next route handler
-                                                  │  (validates, hides the service)
-                                                  ▼
-                                          FastAPI service (Python)
-                                                  │
-              requirements parsing → scraping/cache → preprocessing → TF-IDF → ranking
-                                                  ▼
-                                            ranked products
+Next.js frontend (Vercel)  ──POST /api/recommend──▶  Next route handler
+                                                          │  (validates, proxies upstream)
+                                                          ▼
+                                                  FastAPI service (Render)
+                                                          │
+                      requirements parsing → scraping/cache → preprocessing → TF-IDF → ranking
+                                                          ▼
+                                                    ranked products
 ```
 
 ## Repository layout
@@ -22,8 +28,9 @@ Next.js frontend  ──POST /api/recommend──▶  Next route handler
 | Path | What it is |
 | --- | --- |
 | `web-scraping-project/` | The original notebook and dataset. Untouched — it remains the source of truth for selectors, cleaning rules and the ranking model. |
-| `backend/` | The engine, refactored into a FastAPI service. No logic was reinvented; the notebook's cells map onto modules. |
-| `frontend/` | Next.js 16 + TypeScript + Tailwind + shadcn/ui + Framer Motion. |
+| `backend/` | The engine, refactored into a FastAPI service. Deployed on Render. |
+| `frontend/` | Next.js 16 + TypeScript + Tailwind + shadcn/ui + Framer Motion. Configured for Vercel deployment. |
+| `docker/` | Dockerfiles and configurations for Backend and ML Model containers. |
 
 ### Where each notebook cell went
 

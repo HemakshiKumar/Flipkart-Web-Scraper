@@ -6,10 +6,10 @@ This folder contains the Docker configuration files for containerizing the **Bac
 
 ## Architecture Overview
 
-| Component | Dockerfile | Default Port | Description |
-| :--- | :--- | :--- | :--- |
-| **Backend Service** | [`Dockerfile.backend`](file:///docker/Dockerfile.backend) | `8000` | FastAPI service with Uvicorn, health checks, caching, and recommendation API endpoints. |
-| **ML Model / Jupyter** | [`Dockerfile.ml`](file:///docker/Dockerfile.ml) | `8888` | Machine learning environment with TF-IDF model vectorizer, JupyterLab workspace, and batch inference CLI. |
+| Component | Dockerfile | Default Port | Live Render Endpoint | Description |
+| :--- | :--- | :--- | :--- | :--- |
+| **Backend Service** | [`Dockerfile.backend`](file:///docker/Dockerfile.backend) | `8000` | `https://flipkart-web-scraper.onrender.com` | FastAPI service with Uvicorn, health checks, caching, and recommendation API endpoints. |
+| **ML Model / Jupyter** | [`Dockerfile.ml`](file:///docker/Dockerfile.ml) | `8888` | `https://web-scraper-ml.onrender.com/lab/workspaces/auto-6?reset=1` | Machine learning environment with TF-IDF model vectorizer, JupyterLab workspace, and batch inference CLI. |
 
 ---
 

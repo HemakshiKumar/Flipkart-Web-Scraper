@@ -7,7 +7,7 @@
 
 import "server-only";
 
-const DEFAULT_API_URL = "http://127.0.0.1:8000";
+const DEFAULT_API_URL = "https://flipkart-web-scraper.onrender.com";
 // A cold search scrapes ~20 product pages, which can take the best part of a minute.
 const DEFAULT_TIMEOUT_MS = 90_000;
 

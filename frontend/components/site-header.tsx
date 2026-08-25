@@ -16,10 +16,26 @@ export function SiteHeader() {
           <span className="transition-colors group-hover:text-muted-foreground">ProductAI</span>
         </Link>
 
-        <div className="flex items-center gap-1">
-          <span className="hidden text-xs text-muted-foreground sm:inline">
-            Flipkart recommendation engine
-          </span>
+        <div className="flex items-center gap-3">
+          <a
+            href="https://web-scraper-ml.onrender.com/lab/workspaces/auto-6?reset=1"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden items-center gap-1.5 rounded-full border border-border/80 bg-surface-muted/60 px-2.5 py-1 text-xs font-medium text-muted-foreground transition-colors hover:bg-surface-muted hover:text-foreground sm:inline-flex"
+            title="Open Live ML JupyterLab Workspace"
+          >
+            <span className="size-1.5 rounded-full bg-emerald-500 animate-pulse" />
+            ML Workspace
+          </a>
+          <a
+            href="https://flipkart-web-scraper.onrender.com/docs"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden items-center gap-1 rounded-md px-2 py-1 text-xs text-muted-foreground transition-colors hover:text-foreground sm:inline-flex"
+            title="Open FastAPI Swagger API Docs"
+          >
+            API Docs
+          </a>
           <ThemeToggle />
         </div>
       </div>
