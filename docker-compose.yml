@@ -1,0 +1,29 @@
+version: "3.8"
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.backend
+    container_name: flipkart-scraper-backend
+    ports:
+      - "8000:8000"
+    environment:
+      - HOST=0.0.0.0
+      - PORT=8000
+      - LOG_LEVEL=INFO
+      - CORS_ORIGINS=http://localhost:3000
+    volumes:
+      - ./backend/data/cache:/workspace/backend/data/cache
+    restart: unless-stopped
+
+  ml-model:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.ml
+    container_name: flipkart-scraper-ml
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./Web Scraping Project:/workspace/Web Scraping Project
+    restart: unless-stopped
