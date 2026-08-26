@@ -2,7 +2,6 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { AlertTriangle } from "lucide-react";
 
 import { LoadingState } from "@/components/loading-state";
 import { ProductCard } from "@/components/product-card";
@@ -100,8 +99,6 @@ function ResultsRequest({
             transition={{ duration: 0.25 }}
             className="space-y-5"
           >
-            {status.data.warnings.length > 0 ? <Warnings warnings={status.data.warnings} /> : null}
-
             <div className="hidden md:block">
               <RecommendationTable products={status.data.results} />
             </div>
@@ -114,22 +111,6 @@ function ResultsRequest({
           </motion.div>
         )}
       </AnimatePresence>
-    </div>
-  );
-}
-
-function Warnings({ warnings }: { warnings: string[] }) {
-  return (
-    <div
-      role="note"
-      className="flex gap-3 rounded-lg border border-border/80 bg-surface-muted/60 p-3.5 text-sm text-muted-foreground"
-    >
-      <AlertTriangle className="mt-0.5 size-4 shrink-0" aria-hidden />
-      <ul className="space-y-1">
-        {warnings.map((warning) => (
-          <li key={warning}>{warning}</li>
-        ))}
-      </ul>
     </div>
   );
 }

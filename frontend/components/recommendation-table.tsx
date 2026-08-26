@@ -27,7 +27,7 @@ export function RecommendationTable({ products }: RecommendationTableProps) {
   const columns = deriveColumns(products);
 
   return (
-    <div className="overflow-hidden rounded-xl border border-border/80 bg-card/50 backdrop-blur-sm">
+    <div className="overflow-hidden rounded-xl border border-border/80 bg-card">
       <Table>
         <caption className="sr-only">
           Recommended products ranked by relevance, with rating, price and score.
@@ -61,12 +61,12 @@ export function RecommendationTable({ products }: RecommendationTableProps) {
               }}
               className="group border-b border-border/60 transition-colors last:border-0 hover:bg-accent/40"
             >
-              <TableCell className="pl-5 font-mono text-xs text-muted-foreground tabular-nums">
+              <TableCell className="pl-5 text-xs text-muted-foreground tabular-nums">
                 {String(index + 1).padStart(2, "0")}
               </TableCell>
 
               <TableCell className="max-w-sm">
-                <p className="line-clamp-2 font-medium leading-snug">{product.name}</p>
+                <p className="line-clamp-2 font-bold leading-snug">{product.name}</p>
                 {product.highlights.length > 0 ? (
                   <p className="mt-1 line-clamp-1 text-xs text-muted-foreground">
                     {product.highlights.join(" · ")}

@@ -43,7 +43,7 @@ export function ScoreMeter({ score, similarity, index = 0, className }: ScoreMet
               }}
             />
           </span>
-          <span className="font-mono text-xs tabular-nums text-foreground">
+          <span className="text-xs tabular-nums text-foreground">
             {formatScore(score)}
           </span>
         </span>

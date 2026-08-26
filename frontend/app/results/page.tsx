@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 
 import { ResultsView } from "@/components/results-view";
-import { SearchForm } from "@/components/search-form";
 import {
   MAX_QUERY_LENGTH,
   MAX_REQUIREMENTS_LENGTH,
@@ -36,13 +35,6 @@ export default async function ResultsPage({
   return (
     <div className="mx-auto w-full max-w-5xl flex-1 px-5 py-10 sm:px-8 sm:py-14">
       <ResultsView query={query} requirements={requirements} limit={limit} />
-
-      <section className="mt-16 border-t border-border/60 pt-10">
-        <h2 className="mb-5 text-sm font-medium text-muted-foreground">Refine this search</h2>
-        <div className="rounded-xl border border-border/80 bg-card/50 p-5 backdrop-blur-sm">
-          <SearchForm compact defaults={{ query, requirements, limit }} />
-        </div>
-      </section>
     </div>
   );
 }

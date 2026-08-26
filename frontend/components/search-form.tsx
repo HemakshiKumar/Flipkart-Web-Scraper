@@ -211,7 +211,7 @@ function Field({
     <div className="space-y-2">
       <div className="flex items-baseline justify-between gap-3">
         <Label htmlFor={htmlFor}>{label}</Label>
-        {hint ? <span className="font-mono text-[0.7rem] text-muted-foreground">{hint}</span> : null}
+        {hint ? <span className="text-[0.75rem] text-muted-foreground">{hint}</span> : null}
       </div>
       {children}
     </div>

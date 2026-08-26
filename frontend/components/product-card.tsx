@@ -29,10 +29,10 @@ export function ProductCard({ product, index }: ProductCardProps) {
         ease: [0.22, 1, 0.36, 1],
       }}
     >
-      <Card className="bg-card/60 backdrop-blur-sm transition-colors hover:border-foreground/20">
+      <Card className="bg-card transition-colors hover:border-foreground/30">
         <CardContent className="space-y-3.5 p-4 pt-4">
           <div className="flex items-start justify-between gap-3">
-            <h3 className="text-sm font-medium leading-snug">{product.name}</h3>
+            <h3 className="text-sm font-bold leading-snug">{product.name}</h3>
             <Badge variant="mono" className="shrink-0 tabular-nums">
               #{index + 1}
             </Badge>

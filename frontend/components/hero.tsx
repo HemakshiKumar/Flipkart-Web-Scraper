@@ -27,19 +27,9 @@ export function Hero({ children }: { children: ReactNode }) {
   return (
     <motion.div variants={container} initial="hidden" animate="show" className="space-y-10">
       <div className="space-y-5 text-center">
-        <motion.div variants={item} className="flex justify-center">
-          <span className="inline-flex items-center gap-2 rounded-full border border-border bg-surface-muted/60 px-3 py-1 text-xs text-muted-foreground">
-            <span className="relative flex size-1.5">
-              <span className="absolute inline-flex size-full animate-ping rounded-full bg-foreground/40" />
-              <span className="relative inline-flex size-1.5 rounded-full bg-foreground/70" />
-            </span>
-            Live Flipkart data · TF-IDF ranking
-          </span>
-        </motion.div>
-
         <motion.h1
           variants={item}
-          className="mx-auto max-w-2xl text-balance text-3xl font-semibold tracking-tight sm:text-4xl lg:text-5xl"
+          className="mx-auto max-w-2xl text-balance text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl"
         >
           Find the best products based on what you actually want!
         </motion.h1>
@@ -49,7 +39,7 @@ export function Hero({ children }: { children: ReactNode }) {
 
       <motion.ol
         variants={item}
-        className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1 font-mono text-[0.7rem] uppercase tracking-widest text-muted-foreground"
+        className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-xs uppercase tracking-widest text-muted-foreground"
       >
         {STEPS.map((step, index) => (
           <li key={step} className="flex items-center gap-2">

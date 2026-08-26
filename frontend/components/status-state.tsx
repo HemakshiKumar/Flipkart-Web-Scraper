@@ -23,14 +23,14 @@ function StatusState({ icon, title, description, action }: StatusStateProps) {
       initial={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-      className="flex flex-col items-center gap-4 rounded-xl border border-border/80 bg-card/60 px-6 py-16 text-center backdrop-blur-sm"
+      className="flex flex-col items-center gap-4 rounded-xl border border-border/80 bg-card px-6 py-16 text-center"
       role="status"
     >
       <span className="flex size-11 items-center justify-center rounded-full border border-border bg-surface-muted text-muted-foreground">
         {icon}
       </span>
       <div className="space-y-1.5">
-        <h2 className="text-lg font-medium tracking-tight">{title}</h2>
+        <h2 className="text-lg font-bold tracking-tight">{title}</h2>
         <p className="mx-auto max-w-sm text-balance text-sm text-muted-foreground">{description}</p>
       </div>
       {action}

@@ -128,7 +128,7 @@ def test_results_carry_attributes_and_highlights(pipeline: RecommendationPipelin
     assert product.ratings_count > 0
 
 
-def test_second_identical_search_uses_the_cache(tmp_path) -> None:
+def test_second_identical_search_performs_fresh_scrape(tmp_path) -> None:
     settings = get_settings().model_copy(update={"cache_dir": tmp_path / "cache"})
     scraper = StubScraper()
     pipeline = RecommendationPipeline(settings, DatasetService(settings, scraper=scraper))
@@ -136,8 +136,8 @@ def test_second_identical_search_uses_the_cache(tmp_path) -> None:
     pipeline.run("bluetooth headphones", "", limit=2)
     second = pipeline.run("bluetooth headphones", "", limit=2)
 
-    assert scraper.calls == 1
-    assert second.source.value == "cache"
+    assert scraper.calls == 2
+    assert second.source.value == "live"
 
 
 def test_scrape_failure_falls_back_to_the_repository_dataset(tmp_path) -> None:
